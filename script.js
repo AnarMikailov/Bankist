@@ -63,6 +63,7 @@ const inputClosePin = document.querySelector('.form__input--pin');
 //************************************************** */
 //  28.04.2022 Bankist app
 //**************************************************** */
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 const creatUserName = function (accs) {
   accs.forEach(acc => {
@@ -74,3 +75,11 @@ const creatUserName = function (accs) {
   });
 };
 creatUserName(accounts);
+
+const calcDisplayBalance = function (mov) {
+  const balance = movements.reduce(function (acc, mov) {
+    return acc + mov;
+  }, 0);
+  labelBalance.textContent = `${balance} EUR`;
+};
+calcDisplayBalance(account1.movements);
