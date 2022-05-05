@@ -65,9 +65,11 @@ const inputClosePin = document.querySelector('.form__input--pin');
 //**************************************************** */
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
   containerMovements.innerHTML = '';
-  movements.forEach(function (mov, i) {
+
+  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+  movs.forEach(function (mov, i) {
     const type = mov >= 0 ? 'deposit' : 'withdrawal';
 
     const html = ` <div class="movements__row">
@@ -172,6 +174,9 @@ btnLoan.addEventListener('click', e => {
     currentAccount.movements.push(amount);
     updateUI(currentAccount);
   }
+
+  inputLoanAmount.value = '';
+  inputLoanAmount.blur();
 });
 
 btnClose.addEventListener('click', function (e) {
@@ -189,4 +194,34 @@ btnClose.addEventListener('click', function (e) {
   }
   inputCloseUsername.value = inputClosePin.value = '';
   inputClosePin.blur();
+});
+
+/***************************** 
+ //      05.05.2022
+******************************/
+
+btnSort.addEventListener('click', e => {
+  e.preventDefault();
+});
+
+const accountMovements = accounts.map(acc => acc.movements);
+
+const overallBalance = accounts
+  .map(acc => acc.movements)
+  .flat()
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(overallBalance);
+
+const overallBalance2 = accounts
+  .flatMap(acc => acc.movements)
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(overallBalance2);
+
+let sorted = false;
+
+btnSort.addEventListener('click', e => {
+  e.preventDefault();
+
+  displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted;
 });

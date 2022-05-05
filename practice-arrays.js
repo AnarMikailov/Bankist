@@ -56,3 +56,19 @@
 
 // //Every: This works if all elemets can passing condition
 // console.log(movement.every(mov => mov > 0));
+
+//Flat method
+
+// const accountMovements = accounts.map(acc => acc.movements);
+
+// const overallBalance = accounts
+//   .map(acc => acc.movements)
+//   .flat()
+//   .reduce((acc, mov) => acc + mov, 0);
+// console.log(overallBalance);
+
+// //flatmap method
+// const overallBalance2 = accounts
+//   .flatMap(acc => acc.movements)
+//   .reduce((acc, mov) => acc + mov, 0);
+// console.log(overallBalance2);
