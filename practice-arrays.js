@@ -72,3 +72,49 @@
 //   .flatMap(acc => acc.movements)
 //   .reduce((acc, mov) => acc + mov, 0);
 // console.log(overallBalance2);
+
+/**************************
+//        06.05.2022
+***************************/
+
+const dogs = [
+  { weight: 22, curFood: 250, owners: ['Alice', 'Bob'] },
+  { weight: 8, curFood: 200, owners: ['Matilda'] },
+  { weight: 13, curFood: 275, owners: ['Sarah', 'John'] },
+  { weight: 32, curFood: 340, owners: ['Michael'] },
+];
+console.log(dogs);
+
+// const recommendedFood = dogs.map(dog => dog.weight ** 0.75 * 28);
+// console.log(recommendedFood);
+
+const recommendedFood = dogs.forEach(
+  dog => (dog.recommendedFoods = dog.weight ** 0.75 * 28)
+);
+const arr = [];
+for (let i = 0; i < dogs.length; i++) {
+  arr[i] = dogs[i].owners;
+}
+console.log(arr.flat());
+
+//const a = dogs.forEach((dog, i) => console.log((dog.owners = dogs.flat())));
+//console.log(a);
+
+const sarahDogs = dogs.find(dog => dog.owners.includes('Sarah'));
+console.log(sarahDogs);
+if (
+  sarahDogs.curFood >= sarahDogs.recommendedFoods * 0.9 &&
+  sarahDogs.curFood <= sarahDogs.recommendedFoods * 1.1
+)
+  console.log(true);
+else console.log(false);
+
+const ownersEatTooLittle = [];
+const ownersEatTooMuch = [];
+const dogsCurFood = dogs.map(dog => {
+  if (
+    dog.curFood >= dog.recommendedFoods * 0.9 &&
+    dog.curFood <= dog.recommendedFoods * 1.1
+  )
+    console.log(dog.owners);
+});
